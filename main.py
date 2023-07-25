@@ -1,4 +1,5 @@
 import time
+# import turtle
 from turtle import Screen, Turtle
 import pandas
 
@@ -17,10 +18,17 @@ for i in range(50):
 
 sc = Screen()
 sc.title("US states quiz.")
-sc.setup(width=725, height=491)
-sc.bgpic("blank_states_img.gif")
+sc.setup(width=1200, height=860)
+sc.bgpic("usa-states-map-colors.gif")
+
+# def get_mouse_click_coor(x, y):
+#     print(x, y)
+#
+#
+# turtle.onscreenclick(get_mouse_click_coor)
 
 state_name = Turtle()
+state_name.color("gray10")
 state_name.hideturtle()
 state_name.penup()
 
@@ -35,10 +43,14 @@ while game_on:
                 arg=f"{state['state']}",
                 align="center",
                 move=False,
-                font=("Gautami", 8, "normal")
+                font=("Arial Black", 11, "normal")
             )
             correct_guesses += 1
+            data_dict.remove(state)
             time.sleep(1)
-
+    if correct_guesses == 50:
+        game_on = False
+        time.sleep(4)
+        sc.bye()
 
 sc.mainloop()
