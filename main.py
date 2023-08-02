@@ -9,16 +9,11 @@ states_list = df["state"].to_list()
 x_positions = df["x"].tolist()
 y_positions = df["y"].tolist()
 
-data_dict = []
-
-for i in range(50):
-    temp_tuple = (x_positions[i], y_positions[i])
-    temp_dict = {"state": states_list[i], "position": temp_tuple}
-    data_dict.append(temp_dict)
+data_dict = [{"state": states_list[i], "position":(x_positions[i], y_positions[i])} for i in range(0, 50)]
 
 sc = Screen()
 sc.title("US states quiz.")
-sc.setup(width=1200, height=860)
+sc.setup(width=1200, height=820)
 sc.bgpic("usa-states-map-colors.gif")
 
 # def get_mouse_click_coor(x, y):
@@ -36,9 +31,7 @@ correct_guesses = 0
 while game_on:
     user_guess = (sc.textinput(title=f"States guessed: {correct_guesses}/50", prompt="Type an state's name:")).title()
     if user_guess == "Exit":
-        not_guessed = []
-        for odd_state in data_dict:
-            not_guessed.append(odd_state["state"])
+        not_guessed = [item["state"] for item in data_dict]
         new_data = pandas.DataFrame(not_guessed)
         new_data.to_csv("missed_states.csv")
         break
