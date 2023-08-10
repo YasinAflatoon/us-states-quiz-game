@@ -31,6 +31,15 @@ correct_guesses = 0
 while game_on:
     user_guess = (sc.textinput(title=f"States guessed: {correct_guesses}/50", prompt="Type an state's name:")).title()
     if user_guess == "Exit":
+        for state in data_dict:
+            state_name.goto(state["position"])
+            state_name.write(
+                arg=f"{state['state']}",
+                align="center",
+                move=False,
+                font=("Arial Black", 11, "normal")
+            )
+        time.sleep(5)
         not_guessed = [item["state"] for item in data_dict]
         new_data = pandas.DataFrame(not_guessed)
         new_data.to_csv("missed_states.csv")
