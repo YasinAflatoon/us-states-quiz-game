@@ -16,6 +16,8 @@ sc.title("US states quiz.")
 sc.setup(width=1200, height=820)
 sc.bgpic("usa-states-map-colors.gif")
 
+# Get mouse click X and Y coordinates:
+
 # def get_mouse_click_coor(x, y):
 #     print(x, y)
 #
